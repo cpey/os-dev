@@ -4,12 +4,14 @@
 
 ### Boot Sector
 
-| Program               | Description                                                                 |
-|-----------------------|---------------------------------------------------------------------------- |
-|01.boot_sect.asm       | A simple boot sector written in assembly language.                          |
-|02.boot_sect_print.asm | Simple boot sector that prints a message to the screen using a BIOS routine.|
-|03.addressing.asm      | Addressing demonstration.                                                   |
-|04.addressing.fixed.asm| Specifying the assembler the program load address.                          |
+| Program                 | Description                                                                 |
+|-------------------------|---------------------------------------------------------------------------- |
+|01.boot_sect.asm         | A simple boot sector written in assembly language.                          |
+|02.boot_sect_print.asm   | Simple boot sector that prints a message to the screen using a BIOS routine.|
+|03.addressing.asm        | Addressing demonstration.                                                   |
+|04.addressing.fixed.asm  | Specifying the assembler the program load address.                          |
+|05.stack_manipulation.asm| Demonstrates the use of the stack.                                          |
+|06.print_string.asm      | Prints string using function.                                               |
 
 ## References
 
