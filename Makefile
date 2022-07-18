@@ -14,5 +14,7 @@ OPT=-f bin
 	nasm $^ $(OPT) -o $(BIN)
 06: 06.print_strings.asm
 	nasm $^ $(OPT) -o $(BIN) -i$(INC)
+07: 07.print_hex_strings.asm
+	nasm $^ $(OPT) -o $(BIN) -i$(INC)
 run:
 	qemu-system-i386 -nographic $(BIN)
