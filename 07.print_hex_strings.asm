@@ -12,11 +12,8 @@ call print_hex
 
 jmp $               ; Hang
 
+%include "print_string.asm"
 %include "print_hex.asm"
-
-; Data
-HEX_OUT:
-    db "0x0000", 0
 
 ; Padding and magic BIOS number.
 times 510 - ( $ - $$ ) db 0

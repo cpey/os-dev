@@ -45,4 +45,7 @@ ph_out:
     popa
     ret
 
-%include "print_string.asm"
+; Data
+HEX_OUT:
+    db "0x0000", 0
+

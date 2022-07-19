@@ -16,5 +16,9 @@ OPT=-f bin
 	nasm $^ $(OPT) -o $(BIN) -i$(INC)
 07: 07.print_hex_strings.asm
 	nasm $^ $(OPT) -o $(BIN) -i$(INC)
+08: 08.addessing.segment.asm
+	nasm $^ $(OPT) -o $(BIN)
+09: 09.read_sector.asm
+	nasm $^ $(OPT) -o $(BIN) -i$(INC)
 run:
 	qemu-system-i386 -nographic $(BIN)

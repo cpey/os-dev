@@ -13,6 +13,8 @@
 |05.stack_manipulation.asm| Demonstrates the use of the stack.                                          |
 |06.print_string.asm      | Prints string using function.                                               |
 |07.print_hex_strings.asm | Prints a register value as a hex string.                                    |
+|08.addessing.segment.asm | Memory addressing using segment offsetting.                                 |
+|09.read_sector.asm       | Read sectors from boot disk.                                                |
 
 ## References
 
