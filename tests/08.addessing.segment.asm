@@ -30,7 +30,7 @@ int 0x10                    ; Does this print an X? Succeeds
 jmp $                       ; Jump forever.
 
 the_secret:
-db "X"
+  db "X"
 
 ; Padding and magic BIOS number.
 times 510 -($ - $$) db 0

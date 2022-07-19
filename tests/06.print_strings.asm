@@ -19,10 +19,10 @@ jmp $               ; Hang
 
 ; Data
 HELLO_MSG:
-    db "Hello, World!", 0      ; The zero on the end tells our routine
-                               ; when to stop printing characters.
+  db "Hello, World!", 0      ; The zero on the end tells our routine
+                             ; when to stop printing characters.
 GOODBYE_MSG:
-   db "Goodbye!", 0
+  db "Goodbye!", 0
 
 ; Padding and magic BIOS number.
 times 510 - ( $ - $$ ) db 0
