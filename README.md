@@ -18,5 +18,14 @@
 
 ## References
 
-[1] Writing a Simple Operating System — from Scratch by Nick Blundell
+[1] Writing a Simple Operating System — from Scratch by Nick Blundell  
 https://www.cs.bham.ac.uk/~exr/lectures/opsys/10_11/lectures/os-dev.pdf
+
+[2] Writing Your Own Toy Operating System: Guides & Tutorials  
+http://www.independent-software.com/operating-system-development.html
+
+[3] Yu Wangs Website documentation: Entering 32bit Protected Mode  
+http://homepages.rpi.edu/~wangy52/PersonalWebsite/build/html/Misc/MyOS/src/Day02/Day02.html
+
+[4] ROM BIOS — Vitaly Filatof  
+http://vitaly_filatov.tripod.com/ng/asm/asm_001.html
