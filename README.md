@@ -1,6 +1,6 @@
 # os-dev
 
-## Tests
+## Boot sector tests
 
 | Program                   | Description                                                                 |
 |---------------------------|-----------------------------------------------------------------------------|
@@ -15,6 +15,10 @@
 |09.read_sector.asm         | Read sectors from boot disk.                                                |
 |10.enter_protmode.asm      | Enters 32-bit protected mode.                                               |
 |11.enter_protmode_vga.asm  | Enters 32-bit protected mode clearing the screen.                           |
+|12.boot_kernel.asm         | Boots a C kernel in 32-bit protected mode.                                  |
+
+Build and run given test number (01 - 12):  
+`$ make test <test-number>`
 
 ## References
 

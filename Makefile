@@ -1,9 +1,20 @@
+# Build and run given test number (01 - 11):
+# $	make test <test-number>
+# Build and run kernel test:
+# $ make run
+
 IBS=routines/real_mode
 IPM=routines/protected_mode
-BIN=boot_sect.bin
+OUT=build
+BIN=$(OUT)/boot_sect.bin
 OPT=-f bin
 SRC=tests
-IMG=hda.img
+IMG=$(OUT)/hda.img
+KDIR=kernel
+KBIN=kernel.bin
+KLOC=$(KDIR)/$(OUT)/$(KBIN)
+
+.PHONY: run clean test build-dir
 
 01: $(SRC)/01.boot_sect.asm
 	nasm $^ $(OPT) -o $(BIN)
@@ -27,9 +38,32 @@ IMG=hda.img
 	nasm $^ $(OPT) -o $(BIN) -i$(IBS) -i$(IPM)
 11: $(SRC)/11.enter_protmode_vga.asm
 	nasm $^ $(OPT) -o $(BIN) -i$(IBS) -i$(IPM)
-$(IMG): 11
-	dd if=/dev/zero of=myos.img bs=1024 count=2880
-	dd if=$(BIN) of=$@ seek=0 count=1 conv=notrunc
-run: hda.img
-	qemu-system-i386 -hda hda.img
+12: $(SRC)/12.boot_kernel.asm
+	nasm $^ $(OPT) -o $(BIN) -i$(IBS) -i$(IPM)
+
+build-dir:
+	@-mkdir $(OUT)
+TID=$(filter-out test,$(MAKECMDGOALS))
+test: build-dir
+ifneq ($(TID),12)
+	echo "hello"
+	@$(MAKE) $(TID)
+	dd if=/dev/zero of=$(IMG) bs=1024 count=2880
+	dd if=$(BIN) of=$(IMG) seek=0 count=1 conv=notrunc
+	qemu-system-i386 -hda $(IMG)
+else
+	echo "bye"
+	@$(MAKE) run
+endif
+
+$(KLOC):
+	cd $(KDIR) && $(MAKE) $(KBIN)
+$(IMG): build-dir 12 $(KLOC)
+	cat $(BIN) $(KLOC) > $@
+run: $(IMG)
+	qemu-system-i386 -hda $(IMG)
+
+clean:
+	rm -rf $(KDIR)/$(OUT)
+	rm -rf $(OUT)
 
