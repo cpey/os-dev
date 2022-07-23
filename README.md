@@ -1,5 +1,7 @@
 # os-dev
 
+Exercises and tests from _Writing a Simple Operating System — from Scratch by Nick Blundell_ [1].
+
 ## Tests
 
 | ID | Boot sector program        | Description                                                                 |
@@ -18,7 +20,7 @@
 | 12 | 12.boot_kernel.asm         | Boots a C kernel in 32-bit protected mode.                                  |
 | 13 | 12.boot_kernel.asm         | Boots a C kernel in 32-bit protected mode build with kernel entry routine.  |
 
-Build and run given test id (01 - 13):  
+Build and run given test id (01 - 13) by doing:  
 `$ make test <#id>`
 
 ## References
