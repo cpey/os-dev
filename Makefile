@@ -12,7 +12,7 @@ SRC=tests
 IMG=$(OUT)/hda.img
 KDIR=kernel
 KBIN=kernel.bin
-KLOC=$(KDIR)/$(OUT)/$(KBIN)
+KBUILD=$(OUT)/$(KBIN)
 
 .PHONY: run clean test build-dir
 
@@ -45,25 +45,28 @@ build-dir:
 	@-mkdir $(OUT)
 TID=$(filter-out test,$(MAKECMDGOALS))
 test: build-dir
-ifneq ($(TID),12)
-	echo "hello"
+ifeq ($(TID),12)
+	@$(MAKE) run-12
+else ifeq ($(TID),13)
+	@$(MAKE) run-13
+else
 	@$(MAKE) $(TID)
 	dd if=/dev/zero of=$(IMG) bs=1024 count=2880
 	dd if=$(BIN) of=$(IMG) seek=0 count=1 conv=notrunc
 	qemu-system-i386 -hda $(IMG)
-else
-	echo "bye"
-	@$(MAKE) run
 endif
 
-$(KLOC):
-	cd $(KDIR) && $(MAKE) $(KBIN)
-$(IMG): build-dir 12 $(KLOC)
-	cat $(BIN) $(KLOC) > $@
-run: $(IMG)
+K01:
+	cd $(KDIR) && $(MAKE) $@
+K02:
+	cd $(KDIR) && $(MAKE) $@
+$(IMG):
+	cat $(BIN) $(KBUILD) > $@
+run-12: build-dir 12 K01 $(IMG)
+	qemu-system-i386 -hda $(IMG)
+run-13: build-dir 12 K02 $(IMG)
 	qemu-system-i386 -hda $(IMG)
 
 clean:
-	rm -rf $(KDIR)/$(OUT)
 	rm -rf $(OUT)
 
