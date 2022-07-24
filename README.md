@@ -17,10 +17,11 @@ Exercises and tests from _Writing a Simple Operating System — from Scratch by 
 | 09 | 09.read_sector.asm         | Read sectors from boot disk.                                                |
 | 10 | 10.enter_protmode.asm      | Enters 32-bit protected mode.                                               |
 | 11 | 11.enter_protmode_vga.asm  | Enters 32-bit protected mode clearing the screen.                           |
-| 12 | 12.boot_kernel.asm         | Boots a C kernel in 32-bit protected mode.                                  |
-| 13 | 12.boot_kernel.asm         | Boots a C kernel in 32-bit protected mode build with kernel entry routine.  |
+| 12 | 12-13.boot_kernel.asm      | Boots a C kernel in 32-bit protected mode.                                  |
+| 13 | 12-13.boot_kernel.asm      | Boots a C kernel in 32-bit protected mode build with kernel entry routine.  |
+| 14 | 14.enter_longmode.asm      | Enters 64-bit long mode.                                                    |
 
-Build and run given test id (01 - 13) by doing:  
+Build and run given test #id by doing:  
 `$ make test <#id>`
 
 ## References
@@ -36,3 +37,9 @@ http://homepages.rpi.edu/~wangy52/PersonalWebsite/build/html/Misc/MyOS/src/Day02
 
 [4] ROM BIOS — Vitaly Filatof  
 http://vitaly_filatov.tripod.com/ng/asm/asm_001.html
+
+[5] OSDev.org: Setting Up Long Mode  
+https://wiki.osdev.org/Setting_Up_Long_Mode
+
+[6] Intel® 64 and IA-32 Architectures Software Developer Manuals  
+https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html

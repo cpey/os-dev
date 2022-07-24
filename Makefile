@@ -1,10 +1,9 @@
-# Build and run given test number (01 - 11):
-# $	make test <test-number>
-# Build and run kernel test:
-# $ make run
+# Build and run given test #id:
+# $	make test <#id>
 
 IBS=routines/real_mode
 IPM=routines/protected_mode
+ILM=routines/long_mode
 OUT=build
 BIN=$(OUT)/boot_sect.bin
 OPT=-f bin
@@ -38,8 +37,10 @@ KBUILD=$(OUT)/$(KBIN)
 	nasm $^ $(OPT) -o $(BIN) -i$(IBS) -i$(IPM)
 11: $(SRC)/11.enter_protmode_vga.asm
 	nasm $^ $(OPT) -o $(BIN) -i$(IBS) -i$(IPM)
-12: $(SRC)/12.boot_kernel.asm
+12: $(SRC)/12-13.boot_kernel.asm
 	nasm $^ $(OPT) -o $(BIN) -i$(IBS) -i$(IPM)
+14: $(SRC)/14.enter_logmode.asm
+	nasm $^ $(OPT) -o $(BIN) -i$(IBS) -i$(IPM) -i$(ILM)
 
 build-dir:
 	@-mkdir $(OUT)
@@ -51,9 +52,13 @@ else ifeq ($(TID),13)
 	@$(MAKE) run-13
 else
 	@$(MAKE) $(TID)
-	dd if=/dev/zero of=$(IMG) bs=1024 count=2880
+	dd if=/dev/zero of=$(IMG) bs=1024 count=10
 	dd if=$(BIN) of=$(IMG) seek=0 count=1 conv=notrunc
+ifeq ($(TID),14)
+	qemu-system-x86_64 -hda $(IMG)
+else
 	qemu-system-i386 -hda $(IMG)
+endif
 endif
 
 K01:
