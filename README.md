@@ -1,6 +1,6 @@
 # os-dev
 
-Exercises and tests from _Writing a Simple Operating System — from Scratch by Nick Blundell_ [1].
+Set of exercises to study on x86 platform boot and OS development. Based on _Writing a Simple Operating System — from Scratch by Nick Blundell_ [1].
 
 ## Tests
 
@@ -21,7 +21,7 @@ Exercises and tests from _Writing a Simple Operating System — from Scratch by 
 | 13 | 12-13.boot_kernel.asm      | Boots a C kernel in 32-bit protected mode build with kernel entry routine.  |
 | 14 | 14.enter_longmode.asm      | Enters 64-bit long mode.                                                    |
 
-Build and run given test #id by doing:  
+Build and run given test #id:  
 `$ make test <#id>`
 
 ## References
