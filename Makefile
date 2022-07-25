@@ -41,6 +41,8 @@ KBUILD=$(OUT)/$(KBIN)
 	nasm $^ $(OPT) -o $(BIN) -i$(IBS) -i$(IPM)
 14: $(SRC)/14.enter_logmode.asm
 	nasm $^ $(OPT) -o $(BIN) -i$(IBS) -i$(IPM) -i$(ILM)
+15: $(SRC)/15.boot_sect_split.asm
+	nasm $^ $(OPT) -o $(BIN) -i$(IBS) -i$(IPM) -i$(ILM)
 
 build-dir:
 	@-mkdir $(OUT)
@@ -53,12 +55,13 @@ else ifeq ($(TID),13)
 else
 	@$(MAKE) $(TID)
 	dd if=/dev/zero of=$(IMG) bs=1024 count=10
-	dd if=$(BIN) of=$(IMG) seek=0 count=1 conv=notrunc
-ifeq ($(TID),14)
-	qemu-system-x86_64 -hda $(IMG)
-else
-	qemu-system-i386 -hda $(IMG)
-endif
+	dd if=$(BIN) of=$(IMG) seek=0 count=2 conv=notrunc
+	#cat $(BIN) > $(IMG)
+	if [ $(TID) -ge 14 ] ; then \
+		qemu-system-x86_64 -hda $(IMG); \
+	else \
+		qemu-system-i386 -hda $(IMG); \
+	fi
 endif
 
 K01:

@@ -36,7 +36,7 @@ make_page_entries:
   ; Enable long mode
   mov ecx, 0xC0000080           ; EFER MSR
   rdmsr
-  or  eax, 1 << 8               ; set the LM-bit
+  or eax, 1 << 8                ; set the LM-bit
   wrmsr
 
   lgdt[GDT64.Pointer]
@@ -63,4 +63,5 @@ Realm64:
     mov rbp, 0x90000            ; Update our stack position so it is right
     mov rsp, rbp                ; at the top of the free space.
 
-    call BEGIN_LM
+    call BEGIN_LM_OFF
+    ;call 0x1000
