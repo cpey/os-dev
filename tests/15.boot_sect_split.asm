@@ -12,15 +12,16 @@ BEGIN_LM_OFF equ 0x1000
 ;  mov bx, MSG_REAL_MODE
 ;  call print_string
   call load_sector        ; Load the 2nd sector
-  mov bx, BEGIN_LM_OFF
-  mov cx, 20
-  call print_memory
-  ;call switch_to_pm       ; Note that we never return from here.
+  ;mov bx, BEGIN_LM_OFF
+  ;mov cx, 20
+  ;call print_mem
+  call switch_to_pm       ; Note that we never return from here.
 
   jmp $
 
-%include "print_hex_byte_2.asm"
-%include "print_mem.asm"
+%include "print_hex.asm"
+;%include "print_hex_byte.asm"
+;%include "print_mem.asm"
 %include "disk_load.asm"
 %include "define_gdt.asm"
 %include "define_gdt64.asm"

@@ -64,4 +64,4 @@ Realm64:
     mov rsp, rbp                ; at the top of the free space.
 
     call BEGIN_LM_OFF
-    ;call 0x1000
+    ;call BEGIN_LM

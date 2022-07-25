@@ -1,7 +1,7 @@
 ;
 ; Print the byte in dl as hex
 ;
-print_byte:
+print_hex_byte:
 ; dl byte to print
 ; bx destination string to fill with the ascii values of the byte (dl)
 ; cx iteration counter
@@ -9,36 +9,36 @@ print_byte:
   pusha
   mov bx, HEX_OUT
   xor cx, cx
-ph_next:
+phx_next:
   mov ax, 4           ; get each nibble at a time by doing
   cmp cx, 2           ; bx = (dl >> i * 4) & 0x0F
-  jge ph_out
+  jge phx_out
   push cx
   shl cx, 2
   sub ax, cx
   push dx
-ph_shr:
+phx_shr:
   cmp ax, 0
-  jle ph_enc
+  jle phx_enc
   shr dl, 1
   dec ax
-  jmp ph_shr
-ph_enc:
+  jmp phx_shr
+phx_enc:
   and dl, 0x0F
   cmp dl, 0xa
-  jge ph_enc_a_to_f
+  jge phx_enc_a_to_f
   add dl, 0x30        ; calculate ascii for hex values 0 to 9
-  jmp ph_update_char
-ph_enc_a_to_f:
+  jmp phx_update_char
+phx_enc_a_to_f:
   add dl, 0x57        ; calculate ascii for hex values a to f
-ph_update_char:
+phx_update_char:
   mov BYTE [bx], dl   ; update encoded ascii to the hex string
   pop dx
   pop cx
   inc cx
   inc bx
-  jmp ph_next
-ph_out:
+  jmp phx_next
+phx_out:
   mov bx, HEX_OUT
   call print_string
   popa
