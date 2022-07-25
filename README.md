@@ -7,7 +7,7 @@ Set of exercises to study on x86 platform boot and OS development. Based on _Wri
 | ID | Boot sector program        | Description                                                                 |
 |----|----------------------------|-----------------------------------------------------------------------------|
 | 01 | 01.boot_sect.asm           | Simple boot sector written in assembly language.                            |
-| 02 | 02.boot_sect_print.asm     | Simple boot sector that prints a message to the screen using a BIOS routine.|
+| 02 | 02.boot_sect_print.asm     | Prints a message to the screen using a BIOS routine.                        |
 | 03 | 03.addressing.asm          | Addressing demonstration.                                                   |
 | 04 | 04.addressing.fixed.asm    | Specifying the assembler the program load address.                          |
 | 05 | 05.stack_manipulation.asm  | Demonstrates the use of the stack.                                          |
@@ -18,8 +18,9 @@ Set of exercises to study on x86 platform boot and OS development. Based on _Wri
 | 10 | 10.enter_protmode.asm      | Enters 32-bit protected mode.                                               |
 | 11 | 11.enter_protmode_vga.asm  | Enters 32-bit protected mode clearing the screen.                           |
 | 12 | 12-13.boot_kernel.asm      | Boots a C kernel in 32-bit protected mode.                                  |
-| 13 | 12-13.boot_kernel.asm      | Boots a C kernel in 32-bit protected mode build with kernel entry routine.  |
+| 13 | 12-13.boot_kernel.asm      | Boots a C kernel in 32-bit protected mode using a kernel entry routine.     |
 | 14 | 14.enter_longmode.asm      | Enters 64-bit long mode.                                                    |
+| 15 | 15.boot_sect_split.asm     | Boots into a second stage bootloader in 64-bit long mode.                   |
 
 Build and run given test #id:  
 `$ make test <#id>`

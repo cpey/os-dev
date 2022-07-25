@@ -23,6 +23,14 @@ switch_to_lm:
   mov eax, 0 + 0b111
   mov ecx, 512                  ; number of pages to map (2 MB)
 
+; VA                 PTE        Phys. Address
+; --------------------------------------------
+; 0000000000000000   0x73000    0x001000
+; 0000000000001000   0x73004    0x002000
+; 0000000000002000   0x73008    0x003000
+; ...
+; 00000000001FE000   0x737FC    0x1FF000
+; 00000000001FF000   0x73800    0x200000
 make_page_entries:
   stosd
   add edi, 4
@@ -36,7 +44,7 @@ make_page_entries:
   ; Enable long mode
   mov ecx, 0xC0000080           ; EFER MSR
   rdmsr
-  or  eax, 1 << 8               ; set the LM-bit
+  or eax, 1 << 8                ; set the LM-bit
   wrmsr
 
   lgdt[GDT64.Pointer]
@@ -50,7 +58,7 @@ make_page_entries:
 
 ; Use 64-bit.
 [bits 64]
-; Initialise registers and the stack once in LM.
+; Initialize registers and the stack once in LM.
 Realm64:
     cli                         ; Clear the interrupt flag.
     mov ax, GDT64.Data          ; Set the A-register to the data descriptor.
@@ -60,7 +68,7 @@ Realm64:
     mov gs, ax                  ; Set the G-segment to the A-register.
     mov ss, ax                  ; Set the stack segment to the A-register.
 
-    mov rbp, 0x90000            ; Update our stack position so it is right
-    mov rsp, rbp                ; at the top of the free space.
+    mov rbp, 0x1FE000           ; Update our stack position in VM
+    mov rsp, rbp
 
-    call BEGIN_LM
+    call BEGIN_2ND_STAGE
