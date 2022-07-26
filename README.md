@@ -1,6 +1,6 @@
 # os-dev
 
-Set of exercises to study on x86 platform boot and OS development. Based on _Writing a Simple Operating System — from Scratch by Nick Blundell_ [1].
+Set of exercises to study on x86 platform boot and OS development.
 
 ## Tests
 
@@ -17,10 +17,11 @@ Set of exercises to study on x86 platform boot and OS development. Based on _Wri
 | 09 | 09.read_sector.asm         | Read sectors from boot disk.                                                |
 | 10 | 10.enter_protmode.asm      | Enters 32-bit protected mode.                                               |
 | 11 | 11.enter_protmode_vga.asm  | Enters 32-bit protected mode clearing the screen.                           |
-| 12 | 12-13.boot_kernel.asm      | Boots a C kernel in 32-bit protected mode.                                  |
-| 13 | 12-13.boot_kernel.asm      | Boots a C kernel in 32-bit protected mode using a kernel entry routine.     |
+| 12 | 12.boot_kernel.asm         | Boots a C kernel in 32-bit protected mode.                                  |
+| 13 | 12.boot_kernel.asm         | Boots a C kernel in 32-bit protected mode using a kernel entry routine.     |
 | 14 | 14.enter_longmode.asm      | Enters 64-bit long mode.                                                    |
 | 15 | 15.boot_sect_split.asm     | Boots into a second stage bootloader in 64-bit long mode.                   |
+| 16 | 12.boot_kernel.asm         | The kernel boots in 32-bit and enters 64-bit LM.                            |
 
 Build and run given test #id:  
 `$ make test <#id>`

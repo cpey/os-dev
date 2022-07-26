@@ -5,7 +5,6 @@ print_mem:
 ; bx - Adddress to start printing from
 ; cx - Bytes to print
   mov [BYTES_TO_PRINT], cx
-  mov bx, BEGIN_LM_OFF    ; Address to load the sectors to (0x7e00).
   xor cx, cx
 print_mem_cont:
   mov dx, [bx]
@@ -20,3 +19,5 @@ print_mem_end:
   ret
 
 BYTES_TO_PRINT db 0
+
+%include "print_hex_byte.asm"

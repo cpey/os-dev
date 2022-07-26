@@ -4,7 +4,7 @@
 ; a 2nd stage bootloader running in 64-bit long mode.
 ;
 [bits 64]
-BEGIN_LM:
+SECOND_STAGE_BOOT:
   mov ebx, MSG_LONG_MODE
   call print_string_lm    ; Use our 64-bit print routine.
 

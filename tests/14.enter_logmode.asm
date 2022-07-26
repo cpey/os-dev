@@ -14,7 +14,6 @@
   jmp $
 
 %include "define_gdt.asm"
-%include "define_gdt64.asm"
 %include "print_string.asm"
 %include "print_string_lm.asm"
 %include "switch_to_pm.asm"

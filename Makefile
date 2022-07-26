@@ -38,7 +38,7 @@ KBUILD=$(OUT)/$(KBIN)
 	nasm $^ $(OPT) -o $(BIN) -i$(IBS) -i$(IPM)
 11: $(SRC)/11.enter_protmode_vga.asm
 	nasm $< $(OPT) -o $(BIN) -i$(IBS) -i$(IPM)
-12: $(SRC)/12-13.boot_kernel.asm
+12: $(SRC)/12.boot_kernel.asm
 	nasm $< $(OPT) -o $(BIN) -i$(IBS) -i$(IPM)
 14: $(SRC)/14.enter_logmode.asm
 	nasm $< $(OPT) -o $(BIN) -i$(IBS) -i$(IPM) -i$(ILM)
@@ -56,6 +56,8 @@ ifeq ($(TID),12)
 	@$(MAKE) run-12
 else ifeq ($(TID),13)
 	@$(MAKE) run-13
+else ifeq ($(TID),16)
+	@$(MAKE) run-16
 else
 	@$(MAKE) $(TID)
 	dd if=/dev/zero of=$(IMG) bs=1024 count=10
@@ -70,9 +72,20 @@ else
 	fi
 endif
 
+$(OUT)/set_paging_structures.o: $(ILM)/set_paging_structures.asm
+	nasm $< -f elf64 -o $@ -i$(IBS) -i$(IPM) -i$(ILM)
+$(OUT)/set_long_mode.o: $(ILM)/set_long_mode.asm
+	nasm $< -f elf64 -o $@ -i$(IBS) -i$(IPM) -i$(ILM)
+
+$(OUT)/switch_to_lm.o: $(ILM)/switch_to_lm.asm
+
+DEP16: $(OUT)/set_paging_structures.o $(OUT)/set_long_mode.o
+
 K01:
 	cd $(KDIR) && $(MAKE) $@
 K02:
+	cd $(KDIR) && $(MAKE) $@
+K03:
 	cd $(KDIR) && $(MAKE) $@
 $(IMG):
 	cat $(BIN) $(KBUILD) > $@
@@ -80,6 +93,8 @@ run-12: build-dir 12 K01 $(IMG)
 	qemu-system-i386 -hda $(IMG)
 run-13: build-dir 12 K02 $(IMG)
 	qemu-system-i386 -hda $(IMG)
+run-16: build-dir DEP16 12 K03 $(IMG)
+	qemu-system-x86_64 -hda $(IMG)
 
 clean:
 	rm -rf $(OUT)
