@@ -3,7 +3,7 @@
 ; stages, the second of which runs in 64-bit long mode.
 ;
 [org 0x7c00]
-BEGIN_2ND_STAGE equ 0x1000
+BEGIN_LM equ 0x1000       ; Physical address to load the second stage
 
   mov [BOOT_DRIVE], dl    ; BIOS stores our boot drive in DL
 
@@ -17,10 +17,8 @@ BEGIN_2ND_STAGE equ 0x1000
 
   jmp $
 
-%include "print_hex.asm"
 %include "disk_load.asm"
 %include "define_gdt.asm"
-%include "define_gdt64.asm"
 %include "print_string.asm"
 %include "print_string_pm.asm"
 %include "switch_to_pm.asm"
@@ -30,7 +28,7 @@ BEGIN_2ND_STAGE equ 0x1000
 ; Load 2nd sector
 load_sector:
 
-  mov bx, BEGIN_2ND_STAGE ; Address to load the sectors to (0x7e00).
+  mov bx, BEGIN_LM        ; Address to load the sectors to
   mov dh, 1               ; How many sectors to load (excluding
   mov dl, [BOOT_DRIVE]    ; the boot sector) from the boot disk.
   call disk_load
