@@ -20,6 +20,7 @@ Set of exercises to study on x86 platform boot and OS development. Based on _Wri
 | 12 | 12-13.boot_kernel.asm      | Boots a C kernel in 32-bit protected mode.                                  |
 | 13 | 12-13.boot_kernel.asm      | Boots a C kernel in 32-bit protected mode build with kernel entry routine.  |
 | 14 | 14.enter_longmode.asm      | Enters 64-bit long mode.                                                    |
+| 15 | 15.boot_sect_split.asm     | Boots into a 2nd stage bootloader in 64-bit long mode.                      |
 
 Build and run given test #id:  
 `$ make test <#id>`
